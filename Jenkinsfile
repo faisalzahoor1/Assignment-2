@@ -14,7 +14,7 @@ pipeline {
 
         stage('Clone Repository') {
             steps {
-                 git branch: 'main', url: 'https://github.com/sandhu02/signstream.git'
+                 git branch: 'main', url: 'https://github.com/faisalzahoor1/Assignment-2.git'
             }
         }
 
