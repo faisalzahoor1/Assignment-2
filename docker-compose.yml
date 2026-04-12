@@ -1,9 +1,9 @@
 services:
   signstream:
     image: node:18
-    working_dir: /signstream
+    working_dir: /app
     volumes:
-      - .:/signstream
+      - .:/app
     ports:
       - "8081:6000"
     environment:
