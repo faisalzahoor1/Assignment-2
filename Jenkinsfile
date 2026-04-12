@@ -38,24 +38,4 @@ pipeline {
             }
         }
     }
-}        }
-
-        stage('Cleanup Old Containers') {
-            steps {
-                sh 'docker compose down || true'
-            }
-        }
-
-        stage('Build & Run Containers') {
-            steps {
-                sh 'docker compose up --build -d'
-            }
-        }
-
-        stage('Verify Running') {
-            steps {
-                sh 'docker ps'
-            }
-        }
-    }
 }
