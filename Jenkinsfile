@@ -5,21 +5,40 @@ pipeline {
         githubPush()
     }
 
-    environment {
-        CLOUDINARY_API_SECRET = "FGQvs-WYhzHd76BMFVxP9C1BS2Y"
-        CLOUDINARY_API_KEY = "532658782527543"
-        CLOUDINARY_CLOUD_NAME = "dtd8jg6ps"
-        JWT_SECRET = "dh7ap9IJOkGUef9l99IDFNRbyAKsctTNGxwU1cE12ee"
-        MONGODB_STRING = "mongodb://mongo:27017"
-    }
-
     stages {
-
         stage('Checkout Code') {
             steps {
                 checkout scm
             }
         }
+
+        stage('Verify Files') {
+            steps {
+                sh 'pwd'
+                sh 'ls -la'
+            }
+        }
+
+        stage('Stop Old Part 2') {
+            steps {
+                sh 'docker-compose -f docker-compose-part2.yml down || true'
+            }
+        }
+
+        stage('Start Part 2') {
+            steps {
+                sh 'docker-compose -f docker-compose-part2.yml up -d'
+            }
+        }
+
+        stage('Verify Running') {
+            steps {
+                sh 'docker ps'
+                sh 'curl -I http://localhost:6000 || true'
+            }
+        }
+    }
+}        }
 
         stage('Cleanup Old Containers') {
             steps {
