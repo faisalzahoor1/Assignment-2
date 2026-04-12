@@ -1,13 +1,21 @@
-
 services:
   signstream:
-    image: theabdulraffay/signstream:latest
+    image: node:18
+    working_dir: /signstream
+    volumes:
+      - .:/signstream
     ports:
-      - "8080:8080"
-    env_file:
-      - .env
+      - "3000:3000"
+    environment:
+      CLOUDINARY_API_SECRET: ${CLOUDINARY_API_SECRET}
+      CLOUDINARY_API_KEY: ${CLOUDINARY_API_KEY}
+      CLOUDINARY_CLOUD_NAME: ${CLOUDINARY_CLOUD_NAME}
+      JWT_SECRET: ${JWT_SECRET}
+      MONGODB_STRING : ${MONGODB_STRING}
     depends_on:
       - mongo
+    command: sh -c "npm i && node index.js"
+    restart: always
 
   mongo:
     image: mongo:latest
