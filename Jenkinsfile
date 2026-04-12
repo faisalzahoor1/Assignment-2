@@ -12,6 +12,13 @@ pipeline {
             }
         }
 
+        stage('Prepare Env File') {
+            steps {
+                sh 'cp /home/ubuntu/myapp/.env .env'
+                sh 'ls -la'
+            }
+        }
+
         stage('Verify Files') {
             steps {
                 sh 'pwd'
