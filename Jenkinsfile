@@ -14,8 +14,8 @@ pipeline {
 
         stage('Prepare Env File') {
             steps {
-                sh 'cp /home/ubuntu/myapp/.env .env'
-                sh 'ls -la'
+                sh 'cp /var/lib/jenkins/envs/Assignment-2.env .env'
+                sh 'ls -la .env'
             }
         }
 
